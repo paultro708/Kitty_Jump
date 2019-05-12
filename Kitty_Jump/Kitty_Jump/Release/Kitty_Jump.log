@@ -1,6 +1,9 @@
-﻿  main.cpp
+﻿  Kitty.cpp
+  main.cpp
   Generating code
-  All 4 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  27 of 105 functions (25.7%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  Kitty_Jump.vcxproj -> C:\Users\Paulina\Documents\Studia\4 sem\pk4\projekt\Kitty_Jump\Release\Kitty_Jump.exe
-  Kitty_Jump.vcxproj -> C:\Users\Paulina\Documents\Studia\4 sem\pk4\projekt\Kitty_Jump\Release\Kitty_Jump.pdb (Full PDB)
+  Kitty_Jump.vcxproj -> C:\Users\Paulina\Documents\Studia\4_sem\pk4\projekt\Kitty_Jump\Release\Kitty_Jump.exe
+  Kitty_Jump.vcxproj -> C:\Users\Paulina\Documents\Studia\4_sem\pk4\projekt\Kitty_Jump\Release\Kitty_Jump.pdb (Full PDB)
