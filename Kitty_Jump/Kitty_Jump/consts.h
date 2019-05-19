@@ -24,3 +24,11 @@ enum DirectionX
 	Left,
 	Right
 };
+
+//enum StateType
+//{
+//	Menu=0,
+//	Game,
+//	Pause,
+//	GameOver
+//};

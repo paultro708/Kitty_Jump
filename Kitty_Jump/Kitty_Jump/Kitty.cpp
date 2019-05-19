@@ -36,6 +36,7 @@ void Kitty::move(Vector2f & offset)
 
 Vector2f Kitty::getPosition()
 {
+	//return position;
 	return kitty_pos;
 	//return this->kitty_sprite.getPosition();
 }
@@ -98,4 +99,9 @@ Vector2f Kitty::getOffset()
 	}
 	//to do jumping mechanism
 	return Vector2f(posX, 0);
+}
+
+void Kitty::draw(RenderWindow & window)
+{
+	window.draw(this->kitty_sprite);
 }

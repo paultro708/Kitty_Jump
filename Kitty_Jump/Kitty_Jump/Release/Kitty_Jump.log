@@ -1,9 +1,11 @@
-﻿  Kitty.cpp
+﻿  Game.cpp
   main.cpp
+  Pause.cpp
+  State.cpp
   Generating code
-  27 of 105 functions (25.7%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  33 of 157 functions (21.0%) were compiled, the rest were copied from previous compilation.
+    7 functions were new in current compilation
+    8 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Kitty_Jump.vcxproj -> C:\Users\Paulina\Documents\Studia\4_sem\pk4\projekt\Kitty_Jump\Release\Kitty_Jump.exe
   Kitty_Jump.vcxproj -> C:\Users\Paulina\Documents\Studia\4_sem\pk4\projekt\Kitty_Jump\Release\Kitty_Jump.pdb (Full PDB)

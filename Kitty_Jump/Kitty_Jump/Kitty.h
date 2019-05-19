@@ -1,6 +1,5 @@
 #pragma once
 #include "consts.h"
-#include <iostream>
 
 class Kitty
 {
@@ -25,5 +24,6 @@ public:
 	void checkCylinderEffect(); //chceck go outside the boards in width
 	void update();
 	Vector2f getOffset();
+	void draw(RenderWindow &window);
 };
 
