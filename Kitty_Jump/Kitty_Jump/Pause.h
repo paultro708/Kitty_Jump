@@ -6,5 +6,6 @@ class Pause: public State
 public:
 	Pause();
 	~Pause();
+
 };
 

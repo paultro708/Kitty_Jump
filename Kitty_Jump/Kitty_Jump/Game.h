@@ -17,5 +17,6 @@ private:
 	Clock clock;
 	Kitty my_kitty;
 	vector <Platform> Ptab;
+	Platform tmp;
 };
 

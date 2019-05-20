@@ -3,7 +3,11 @@
 
 Game::Game()
 {
-
+	for (int i = 0; i < NUMBER_PLATFORMS; i++)
+	{
+		Platform plat;
+		this->Ptab.push_back(plat);
+	}
 }
 
 
@@ -65,5 +69,8 @@ void Game::render()
 {
 	window.clear(Color::White);
 	my_kitty.draw(this->window);
+	//for (int i = 0; i < NUMBER_PLATFORMS; i++)
+	//	Ptab[i].draw(this->window);
+	tmp.draw(this->window);
 	window.display();
 }
