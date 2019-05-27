@@ -80,7 +80,7 @@ void Kitty::update()
 	default:
 		break;
 	}
-
+	
 }
 
 Vector2f Kitty::getOffset()

@@ -15,6 +15,7 @@ Vector2f Platform::getPosition()
 
 void Platform::setPosition(Vector2f & newPos)
 {
+	plat_pos = newPos;
 	plat_sprite.setPosition(newPos);
 }
 
@@ -29,7 +30,14 @@ Platform::Platform()
 	this->plat_txt.loadFromFile(plat_png);
 	this->plat_sprite.setTexture(plat_txt);
 	this->plat_sprite.setPosition(plat_pos);
+}
 
+Platform::Platform(Vector2f position)
+{
+	this->plat_pos = position;
+	this->plat_txt.loadFromFile(plat_png);
+	this->plat_sprite.setTexture(plat_txt);
+	this->plat_sprite.setPosition(plat_pos);
 }
 
 

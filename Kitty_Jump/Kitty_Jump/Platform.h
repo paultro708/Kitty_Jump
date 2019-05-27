@@ -1,5 +1,6 @@
 #pragma once
 #include "consts.h"
+#include <random>
 
 class Platform
 {
@@ -18,6 +19,7 @@ public:
 
 public:
 	Platform();
+	Platform(Vector2f position);
 	~Platform();
 };
 

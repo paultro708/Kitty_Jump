@@ -2,7 +2,7 @@
 
 int main()
 {
-	
+	srand(time(NULL));
 	Event event;
 	State *state = NULL;
 	Game* newgame = new Game();
