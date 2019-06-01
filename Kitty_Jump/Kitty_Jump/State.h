@@ -9,13 +9,13 @@ public:
 	float getScore();
 	void setScore(float deltaScore);
 	void resetScore();
-	virtual void doTheLoop(Event &event) = 0;
-	virtual void checkEvents(Event &event)=0;
-	virtual void render() = 0;
+	bool gameOver = false;
+	virtual void doTheLoop(Event &event, RenderWindow &window) = 0;
+	virtual void checkEvents(Event &event, RenderWindow &window)=0;
+	virtual void render(RenderWindow &window) = 0;
 
 	//StateType Gstate;
 	float actualScore;
-	RenderWindow window;
 
 };
 

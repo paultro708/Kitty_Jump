@@ -12,23 +12,23 @@ Game::Game()
 	gen_platforms();
 }
 
-
 Game::~Game()
 {
 }
 
-void Game::doTheLoop(Event &event)
+void Game::doTheLoop(Event &event, RenderWindow &window)
 {
-	while (window.isOpen())
+	//while (window.isOpen())
 	{
-		this->checkEvents(event);
+		this->checkEvents(event, window);
 		this->my_kitty.update();
 		this->update_jumping();
-		this->render();
+		this->checkGameEnd();
+		this->render(window);
 	}
 }
 
-void Game::checkEvents(Event & event)
+void Game::checkEvents(Event & event, RenderWindow &window)
 {
 	while (window.pollEvent(event))
 	{
@@ -65,13 +65,24 @@ void Game::checkEvents(Event & event)
 	}
 }
 
-void Game::render()
+void Game::render(RenderWindow &window)
 {
 	window.clear(Color::White);
-	my_kitty.draw(this->window);
-	draw_platforms(this->window);
+	my_kitty.draw(window);
+	draw_platforms(window);
 	//tmp.draw(this->window);
 	window.display();
+}
+
+bool Game::checkGameEnd()
+{
+	if (my_kitty.getPosition().y + KITTY_SIZE.y > WINDOW_SIZE.y)
+	{
+		cout << "gae=me over!";
+		this->gameOver = true;
+		return gameOver;
+	}
+	else return gameOver;
 }
 
 void Game::gen_platforms()
@@ -112,7 +123,7 @@ void Game::update_jumping()
 	Vector2f tmpPlatformPos;
 
 	if (tmpKittyPos.y < MAX_KITTY_JUMP_HEIGHT)
-		for (int i = 0; i < Ptab.size(); i++)
+		for (int i = 0; i < NUMBER_PLATFORMS; i++)
 		{
 			tmpKittyPos.y = MAX_KITTY_JUMP_HEIGHT;
 			my_kitty.setPosition(tmpKittyPos);
@@ -124,15 +135,11 @@ void Game::update_jumping()
 		}
 
 	//detection jumping on the platform
-	for (int i = 0; i < Ptab.size(); i++)
+	for (int i = 0; i < NUMBER_PLATFORMS; i++)
 	{ //do dopracowania 
 		Vector2f tmpKittyPos = my_kitty.getPosition();
 		Vector2f tmpPlatformPos = Ptab[i].getPosition();
-		if ((my_kitty.getPosition().x + KITTY_RIGHT_BOUNDING_BOX < Ptab[i].getPosition().x)
-			&& (my_kitty.getPosition().x + KITTY_LEFT_BOUNDING_BOX < Ptab[i].getPosition().x + PLATFORM_SIZE.x)
-			&& (my_kitty.getPosition().y + KITTY_SIZE.y >= Ptab[i].getPosition().y)
-			&& (my_kitty.getPosition().y + KITTY_SIZE.y < Ptab[i].getPosition().y + PLATFORM_SIZE.y)
-			&& (dy > 0))
+		if (checkJumping())
 		{
 			dy = -10;
 		}
@@ -146,6 +153,24 @@ void Game::draw_platforms(RenderWindow &window)
 	{
 		Ptab[i].draw(window);
 	}
+}
+
+bool Game::checkJumping()
+{
+	for (int i = 0; i < NUMBER_PLATFORMS; i++)
+	{
+		Vector2f platformPos = Ptab[i].getPosition();
+		Vector2f kittyPos = my_kitty.getPosition();
+		if (((kittyPos.y + KITTY_SIZE.y >= platformPos.y) //check vertical collision
+			&& (kittyPos.y + KITTY_SIZE.y <= platformPos.y + PLATFORM_SIZE.y)
+			&& (kittyPos.x + KITTY_RIGHT_BOUNDING_BOX >= platformPos.x) //check hozizontal
+			&& (kittyPos.x + KITTY_LEFT_BOUNDING_BOX - PLATFORM_SIZE.x <= platformPos.x))) 
+		// checking bounding box to detect jump with only kitty's paws, not at whole width of sprite
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 Vector2f Game::genRandomVectf()

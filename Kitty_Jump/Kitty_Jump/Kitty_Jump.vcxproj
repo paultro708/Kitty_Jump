@@ -119,6 +119,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Kitty.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Pause.cpp" />
@@ -128,6 +129,7 @@
   <ItemGroup>
     <ClInclude Include="consts.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="Kitty.h" />
     <ClInclude Include="Pause.h" />
     <ClInclude Include="Platform.h" />

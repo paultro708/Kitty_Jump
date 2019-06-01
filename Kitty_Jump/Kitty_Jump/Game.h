@@ -9,9 +9,10 @@ class Game: public State
 public:
 	Game();
 	~Game();
-	void doTheLoop(Event &event);
-	void checkEvents(Event &event);
-	void render();
+	void doTheLoop(Event &event, RenderWindow &window);
+	void checkEvents(Event &event, RenderWindow &window);
+	void render(RenderWindow &window);
+	bool checkGameEnd();
 
 private:
 	float dy = 0;
@@ -23,6 +24,7 @@ private:
 	void update_platform(Vector2f &platformPos);
 	void update_jumping();
 	void draw_platforms(RenderWindow &window);
+	bool checkJumping();
 	Vector2f genRandomVectf();
 
 };
