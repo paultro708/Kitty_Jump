@@ -9,6 +9,11 @@ Game::Game()
 		Platform plat;
 		this->Ptab.push_back(plat);
 	}*/
+	if (!backgroundTxt.loadFromFile("images/background.png"))
+		cout << "error bacground";
+	backgroundSprite.setTexture(backgroundTxt);
+
+	gamePaused = false;
 	gen_platforms();
 }
 
@@ -21,11 +26,14 @@ void Game::doTheLoop(Event &event, RenderWindow &window)
 	//while (window.isOpen())
 	{
 		this->checkEvents(event, window);
-		this->my_kitty.update();
-		this->update_jumping();
-		this->checkGameEnd();
+		if (!gamePaused) {
+			this->my_kitty.update();
+			this->update_jumping();
+			this->checkGameEnd();
+		}
 		this->render(window);
 	}
+
 }
 
 void Game::checkEvents(Event & event, RenderWindow &window)
@@ -36,38 +44,52 @@ void Game::checkEvents(Event & event, RenderWindow &window)
 			window.close();
 	}
 
-	if (event.type == Event::KeyPressed)
-		switch (event.key.code)
-		{
-		case Keyboard::Left:
-			my_kitty.directX = Left;
-			break;
-		case Keyboard::Right:
-			my_kitty.directX = Right;
-			break;
-		default:
-			my_kitty.directX = None;
-		}
-
-	if (event.type == sf::Event::KeyReleased)
+	if (Keyboard::isKeyPressed(Keyboard::P))
+	//if(event.type == Event::KeyPressed && event.key.code == sf::Keyboard::P)
 	{
-		switch (event.key.code)
+		if (gamePaused)
+			gamePaused = false;
+		else
+			gamePaused = true;
+
+	}
+	if (!gamePaused) {
+
+		if (event.type == Event::KeyPressed)
+			switch (event.key.code)
+			{
+			case Keyboard::Left:
+				my_kitty.directX = Left;
+				break;
+			case Keyboard::Right:
+				my_kitty.directX = Right;
+				break;
+			default:
+				my_kitty.directX = None;
+			}
+
+		if (event.type == sf::Event::KeyReleased)
 		{
-		case Keyboard::Left:
-			my_kitty.directX = None;
-			break;
-		case Keyboard::Right:
-			my_kitty.directX = None;
-			break;
-		default:
-			break;
+			switch (event.key.code)
+			{
+			case Keyboard::Left:
+				my_kitty.directX = None;
+				break;
+			case Keyboard::Right:
+				my_kitty.directX = None;
+				break;
+			default:
+				break;
+			}
 		}
 	}
+
 }
 
 void Game::render(RenderWindow &window)
 {
 	window.clear(Color::White);
+	window.draw(backgroundSprite);
 	my_kitty.draw(window);
 	draw_platforms(window);
 	//tmp.draw(this->window);
@@ -164,8 +186,8 @@ bool Game::checkJumping()
 		if (((kittyPos.y + KITTY_SIZE.y >= platformPos.y) //check vertical collision
 			&& (kittyPos.y + KITTY_SIZE.y <= platformPos.y + PLATFORM_SIZE.y)
 			&& (kittyPos.x + KITTY_RIGHT_BOUNDING_BOX >= platformPos.x) //check hozizontal
-			&& (kittyPos.x + KITTY_LEFT_BOUNDING_BOX - PLATFORM_SIZE.x <= platformPos.x))) 
-		// checking bounding box to detect jump with only kitty's paws, not at whole width of sprite
+			&& (kittyPos.x + KITTY_LEFT_BOUNDING_BOX - PLATFORM_SIZE.x <= platformPos.x)))
+			// checking bounding box to detect jump with only kitty's paws, not at whole width of sprite
 		{
 			return true;
 		}
@@ -180,4 +202,3 @@ Vector2f Game::genRandomVectf()
 	pos.y = rand() % (int)(WINDOW_SIZE.y - PLATFORM_SIZE.y);
 	return pos;
 }
-

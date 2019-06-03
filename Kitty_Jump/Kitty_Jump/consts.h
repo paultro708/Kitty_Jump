@@ -12,10 +12,11 @@ static const string WINDOW_TITLE = "Kitty Jump!";
 static const unsigned WINDOW_FRAME_LIMIT = 60;
 
 
+
 static const Vector2f KITTY_SIZE = { 70,70 };
 static const Vector2f KITTY_INITIAL_POSITION = 0.5f * (Vector2f(WINDOW_SIZE) - KITTY_SIZE) ;
 static const unsigned MAX_KITTY_JUMP_HEIGHT = 150.f;
-static const unsigned PLATFORM_DELTA_REFLECT = 22.f;
+static const unsigned PLATFORM_DELTA_REFLECT =  22.f;
 
 static const Vector2f PLATFORM_SIZE = { 63, 14 };
 static const unsigned NUMBER_PLATFORMS = 10;
@@ -32,6 +33,14 @@ enum DirectionX
 	None = 0,
 	Left,
 	Right
+};
+
+enum MenuStates
+{
+	Play = 0,
+	Help,
+	Ranking,
+	Quit
 };
 
 //enum StateType

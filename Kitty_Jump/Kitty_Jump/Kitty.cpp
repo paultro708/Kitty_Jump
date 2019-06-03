@@ -63,10 +63,9 @@ void Kitty::checkCylinderEffect()
 
 void Kitty::update()
 {
-
 	checkCylinderEffect();
-	this->move(getOffset());
-	this->kitty_pos += getOffset();
+	this->move(getHorizontalOffset());
+	this->kitty_pos += getHorizontalOffset();
 	this->kitty_pos = kitty_sprite.getPosition();
 
 	switch (directX)
@@ -83,7 +82,7 @@ void Kitty::update()
 	
 }
 
-Vector2f Kitty::getOffset()
+Vector2f Kitty::getHorizontalOffset()
 {
 	float posX = 0;
 	switch (directX)
@@ -105,3 +104,4 @@ void Kitty::draw(RenderWindow & window)
 {
 	window.draw(this->kitty_sprite);
 }
+

@@ -5,13 +5,14 @@
 GameOver::GameOver()
 {
 	this->gameOver = true; 
-	if (!font.loadFromFile("font/arial.ttf"))
+	if (!font.loadFromFile("font/RAVIE.ttf"))
 	{
 		throw 1;
 	}
 	textGameOver.setFont(font); 
+	textGameOver.setPosition(50, WINDOW_SIZE.y / 2 - 50);
 	textGameOver.setString("Game Over!");
-	textGameOver.setCharacterSize(24);
+	textGameOver.setCharacterSize(34);
 	textGameOver.setFillColor(sf::Color::Red);
 	textGameOver.setStyle(Text::Bold);
 
@@ -24,7 +25,7 @@ GameOver::~GameOver()
 
 void GameOver::doTheLoop(Event & event, RenderWindow &window)
 {
-	window.clear(Color::Black);
+	window.clear(Color::White);
 	this->checkEvents(event, window);
 	this->render(window);
 	window.display();

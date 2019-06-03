@@ -11,6 +11,7 @@ protected:
 
 	Texture kitty_txtL, kitty_txtR; //textures of left and right
 
+
 public:
 	Sprite kitty_sprite;
 	DirectionX directX = None;
@@ -23,7 +24,10 @@ public:
 	void setPosition(Vector2f &newPos);
 	void checkCylinderEffect(); //chceck go outside the boards in width
 	void update();
-	Vector2f getOffset();
+
+	Vector2f getHorizontalOffset();
 	void draw(RenderWindow &window);
+	
+	
 };
 

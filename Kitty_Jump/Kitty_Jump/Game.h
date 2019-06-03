@@ -15,6 +15,8 @@ public:
 	bool checkGameEnd();
 
 private:
+	Texture backgroundTxt;
+	Sprite backgroundSprite;
 	float dy = 0;
 	Clock clock;
 	Kitty my_kitty;
@@ -26,6 +28,8 @@ private:
 	void draw_platforms(RenderWindow &window);
 	bool checkJumping();
 	Vector2f genRandomVectf();
+
+	bool gamePaused;
 
 };
 
