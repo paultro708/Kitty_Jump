@@ -1,10 +1,12 @@
 #pragma once
 #include "consts.h"
+#include "Assets.h"
 
 class State
 {
 public:
 	State();
+	shared_ptr<Assets> assets;
 	virtual ~State() {};
 	float getScore();
 	void setScore(float deltaScore);

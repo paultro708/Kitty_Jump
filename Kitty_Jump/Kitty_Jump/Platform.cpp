@@ -24,22 +24,13 @@ void Platform::draw(RenderWindow & window)
 	window.draw(this->plat_sprite);
 }
 
-Platform::Platform()
+Platform::Platform(shared_ptr<Assets> ptr_assets)
 {
+	assets = ptr_assets;
 	this->plat_pos = PLATFORM_INITIAL_POSITION;
-	this->plat_txt.loadFromFile(plat_png);
-	this->plat_sprite.setTexture(plat_txt);
+	this->plat_sprite.setTexture(assets->PLATFORM_TEXTURE);
 	this->plat_sprite.setPosition(plat_pos);
 }
-
-Platform::Platform(Vector2f position)
-{
-	this->plat_pos = position;
-	this->plat_txt.loadFromFile(plat_png);
-	this->plat_sprite.setTexture(plat_txt);
-	this->plat_sprite.setPosition(plat_pos);
-}
-
 
 Platform::~Platform()
 {

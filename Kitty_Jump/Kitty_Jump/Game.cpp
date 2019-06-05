@@ -2,16 +2,15 @@
 
 
 
-Game::Game()
+Game::Game(shared_ptr <Assets> ptr_assets) : my_kitty(ptr_assets), tmpPlatform(ptr_assets)
 {
 	/*for (int i = 0; i < NUMBER_PLATFORMS; i++)
 	{
 		Platform plat;
 		this->Ptab.push_back(plat);
 	}*/
-	if (!backgroundTxt.loadFromFile("images/background.png"))
-		cout << "error bacground";
-	backgroundSprite.setTexture(backgroundTxt);
+	assets = ptr_assets;
+	backgroundSprite.setTexture(assets->BACKGROUND_TEXTURE);
 
 	gamePaused = false;
 	gen_platforms();
@@ -202,3 +201,44 @@ Vector2f Game::genRandomVectf()
 	pos.y = rand() % (int)(WINDOW_SIZE.y - PLATFORM_SIZE.y);
 	return pos;
 }
+//
+//void Game::falling(float &offsetY)
+//{
+//	float tmpSpeed = PLATFORM_DELTA_REFLECT;
+//	if (checkJumping())
+//	{
+//		my_kitty.setSpeedY(my_kitty.getSpeedY() + ACCELERATION / 8);
+//		offsetY= my_kitty.getSpeedY();
+//	}
+//	else {
+//		my_kitty.setSpeedY(-tmpSpeed);
+//	}
+//}
+//
+//void Game::jumping(float &offsetY)
+//{
+//	my_kitty.setSpeedY(my_kitty.getSpeedY() + ACCELERATION);
+//	offsetY = my_kitty.getSpeedY();
+//}
+//
+//float Game::getKittyVerticalOffset()
+//{
+//	float offsetY = 0;
+//
+//	if (my_kitty.getSpeedY() < 0)
+//	{
+//		jumping(offsetY);
+//	}
+//	else
+//		falling(offsetY);
+//	return offsetY;
+//}
+//
+//void Game::moveKitty()
+//{
+//	Vector2f pos;
+//	pos.x = my_kitty.getHorizontalOffset();
+//	pos.y = getKittyVerticalOffset();
+//	my_kitty.move(pos);
+//}
+//

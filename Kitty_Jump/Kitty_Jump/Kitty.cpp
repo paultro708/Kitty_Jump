@@ -2,30 +2,19 @@
 
 
 
-Kitty::Kitty()
+Kitty::Kitty(shared_ptr<Assets> ptr_assets)
 {
+
+	assets = ptr_assets;
+
 	this->kitty_pos = KITTY_INITIAL_POSITION;
-	this->kitty_txtR.loadFromFile(right_png);
-	this->kitty_txtL.loadFromFile(left_png);
-	this->kitty_sprite.setTexture(kitty_txtR);
+	this->kitty_sprite.setTexture(assets->KITTY_RIGHT_TEXTURE);
 	this->kitty_sprite.setPosition(KITTY_INITIAL_POSITION);
 }
 
 
 Kitty::~Kitty()
 {
-}
-
-void Kitty::moveLeft()
-{
-	this->kitty_pos.x -= STEP;
-}
-
-void Kitty::moveRight()
-{
-	this->kitty_pos.x += STEP;
-	//this->kitty_sprite.setPosition(position);
-	this->kitty_sprite.move(kitty_pos.x, kitty_pos.y);
 }
 
 void Kitty::move(Vector2f & offset)
@@ -71,10 +60,10 @@ void Kitty::update()
 	switch (directX)
 	{
 	case Right:
-		this->kitty_sprite.setTexture(kitty_txtR);
+		this->kitty_sprite.setTexture(assets->KITTY_RIGHT_TEXTURE);
 		break;
 	case Left:
-		this->kitty_sprite.setTexture(kitty_txtL);
+		this->kitty_sprite.setTexture(assets->KITTY_LEFT_TEXTURE);
 		break;
 	default:
 		break;

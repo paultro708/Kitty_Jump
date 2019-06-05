@@ -1,11 +1,10 @@
 #pragma once
-#include "consts.h"
 #include "State.h"
 
 class GameOver: public State
 {
 public:
-	GameOver();
+	GameOver(shared_ptr <Assets> ptr_assets);
 	~GameOver();
 	void doTheLoop(Event &event, RenderWindow &window);
 	void checkEvents(Event &event, RenderWindow &window);
@@ -13,6 +12,6 @@ public:
 
 private:
 	Text textGameOver;
-	Font font;
+	Sprite backgroundSprite;
 };
 

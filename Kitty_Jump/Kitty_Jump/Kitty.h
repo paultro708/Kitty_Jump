@@ -1,33 +1,31 @@
 #pragma once
 #include "consts.h"
+#include "Assets.h"
 
 class Kitty
 {
-protected:
-	Vector2f kitty_pos; //position of player
-
-	string left_png = "images/kitty_left.png";
-	string right_png = "images/kitty_right.png";
-
-	Texture kitty_txtL, kitty_txtR; //textures of left and right
-
+private:
+	shared_ptr<Assets> assets;
+	Vector2f kitty_pos; 
+	Sprite kitty_sprite;
+	void checkCylinderEffect(); //chceck go outside the boards in width
+	Vector2f getHorizontalOffset();
 
 public:
-	Sprite kitty_sprite;
 	DirectionX directX = None;
-	Kitty();
+	Kitty(shared_ptr<Assets> ptr_assets);
 	~Kitty();
-	void moveLeft();
-	void moveRight();
 	void move(Vector2f &deltaPos);
 	Vector2f getPosition();
 	void setPosition(Vector2f &newPos);
-	void checkCylinderEffect(); //chceck go outside the boards in width
 	void update();
-
-	Vector2f getHorizontalOffset();
 	void draw(RenderWindow &window);
-	
-	
+
+	/*
+	float getSpeedY();
+	void setSpeedY(float newSpeed);*/
+
+
+	//	float getHorizontalOffset();
 };
 

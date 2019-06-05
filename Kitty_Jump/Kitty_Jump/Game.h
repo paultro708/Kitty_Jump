@@ -7,7 +7,7 @@
 class Game: public State
 {
 public:
-	Game();
+	Game (shared_ptr <Assets> ptr_assets);
 	~Game();
 	void doTheLoop(Event &event, RenderWindow &window);
 	void checkEvents(Event &event, RenderWindow &window);
@@ -15,7 +15,6 @@ public:
 	bool checkGameEnd();
 
 private:
-	Texture backgroundTxt;
 	Sprite backgroundSprite;
 	float dy = 0;
 	Clock clock;

@@ -2,20 +2,18 @@
 
 
 
-GameOver::GameOver()
+GameOver::GameOver(shared_ptr <Assets> ptr_assets)
 {
 	this->gameOver = true; 
-	if (!font.loadFromFile("font/RAVIE.ttf"))
-	{
-		throw 1;
-	}
-	textGameOver.setFont(font); 
+	assets = ptr_assets;
+	textGameOver.setFont(assets->RAVIE); 
 	textGameOver.setPosition(50, WINDOW_SIZE.y / 2 - 50);
 	textGameOver.setString("Game Over!");
 	textGameOver.setCharacterSize(34);
 	textGameOver.setFillColor(sf::Color::Red);
 	textGameOver.setStyle(Text::Bold);
 
+	backgroundSprite.setTexture(assets->BACKGROUND_TEXTURE);
 }
 
 
@@ -42,5 +40,6 @@ void GameOver::checkEvents(Event & event, RenderWindow &window)
 
 void GameOver::render(RenderWindow &window)
 {
+	window.draw(backgroundSprite);
 	window.draw(textGameOver);
 }
