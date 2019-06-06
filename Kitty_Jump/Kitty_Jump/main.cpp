@@ -1,6 +1,6 @@
 #include "Game.h"
-#include "Pause.h"
 #include "GameOver.h"
+#include "Menu.h"
 #include <typeinfo> 
 
 
@@ -19,9 +19,11 @@ int main()
 	State *state = NULL;
 	Game *newgame = new Game(ptr_assets);
 	GameOver *gameover = new GameOver(ptr_assets);
+	Menu *menu = new Menu(ptr_assets);
 
 	//state = newgame;
 	state = newgame;
+	state = menu;
 	//state->doTheLoop(event);
 
 	while (window.isOpen())
@@ -37,7 +39,7 @@ int main()
 	}
 
 	cout << "\nuzyto:" << ptr_assets.use_count() << "accounts" << endl;
-	delete newgame, gameover;
+	delete newgame, gameover, menu;
 	_CrtDumpMemoryLeaks();
 	system("pause");
 	return 0;

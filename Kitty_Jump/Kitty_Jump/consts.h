@@ -29,6 +29,8 @@ static const auto STEP = 6.f;
 const int KITTY_LEFT_BOUNDING_BOX = 25;
 const int KITTY_RIGHT_BOUNDING_BOX = 45;
 
+static const Vector2f BUTTON_SIZE = { 333,125 };
+
 enum DirectionX
 {
 	None = 0,

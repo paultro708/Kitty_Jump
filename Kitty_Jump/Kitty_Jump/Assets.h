@@ -11,14 +11,16 @@ public:
 	Assets();
 	~Assets();
 	void addTexture(Texture &texture, const string &name);
-	void addFont(Font &font, string name);
+	void addFont(Font &font, const string &name);
 
 	Texture BACKGROUND_TEXTURE;
 	Texture PLATFORM_TEXTURE;
 	Texture KITTY_LEFT_TEXTURE;
 	Texture KITTY_RIGHT_TEXTURE;
-	//Texture BUTTON_ACTIVE_TEXTURE;
-	//Texture BUTTON_INACTIVE_TEXTURE;
+	Texture BUTTON_ACTIVE_TEXTURE;
+	Texture BUTTON_TEXTURE;
+	Texture LOGO_TEXT;
+	Texture KITTY;
 
 	Font RAVIE;
 };

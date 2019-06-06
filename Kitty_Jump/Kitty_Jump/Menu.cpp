@@ -2,8 +2,19 @@
 
 
 
-Menu::Menu()
+Menu::Menu(shared_ptr <Assets> ptr_assets) :
+	playButton(ptr_assets, "Play", 300),
+	quitButton(ptr_assets, "Quit", 500)
 {
+	assets = ptr_assets;
+	logo.setTexture(assets->LOGO_TEXT);
+	//logo.setPosition(0, 0);
+
+
+	background.setTexture(assets->BACKGROUND_TEXTURE);
+	kitty.setTexture(assets->KITTY);
+	//kitty.setScale({ 1.5, 1.5 });
+	kitty.setPosition(  100, WINDOW_SIZE.y - KITTY_SIZE.y);
 }
 
 
@@ -32,7 +43,11 @@ void Menu::checkEvents(Event & event, RenderWindow & window)
 void Menu::render(RenderWindow & window)
 {
 	window.clear(Color::White);
-	//my_kitty.draw(window);
+	window.draw(background);
+	window.draw(logo);
+	window.draw(kitty);
+	playButton.draw(window);
+	quitButton.draw(window);
 	//draw_platforms(window);
 	window.display();
 }
