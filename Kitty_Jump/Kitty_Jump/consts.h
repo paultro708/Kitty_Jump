@@ -20,7 +20,7 @@ static const unsigned MAX_KITTY_JUMP_HEIGHT = 150.f;
 static const unsigned PLATFORM_DELTA_REFLECT =  22.f;
 
 static const Vector2f PLATFORM_SIZE = { 63, 14 };
-static const unsigned NUMBER_PLATFORMS = 10;
+static const unsigned NUMBER_PLATFORMS = 12;
 static const Vector2f PLATFORM_INITIAL_POSITION = {0,0}; // vector for checking
 //{ WINDOW_SIZE.x / 2.f, WINDOW_SIZE.y + KITTY_INITIAL_POSITION.y };
 
@@ -40,9 +40,7 @@ enum DirectionX
 
 enum MenuStates
 {
-	Play = 0,
-	Help,
-	Ranking,
+	Play=0,
 	Quit
 };
 

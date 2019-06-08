@@ -1,24 +1,18 @@
 #include "State.h"
 
-
 State::State() 
 {
 
 }
 
-float State::getScore()
+int State::getScore()
 {
 	return this->actualScore;
 }
 
-void State::setScore(float deltaScore)
-{
-	this->actualScore += deltaScore;
-}
-
 void State::resetScore()
 {
-	this->actualScore = 0.f;
+	this->actualScore = 0;
 }
 
 

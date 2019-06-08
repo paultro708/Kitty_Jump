@@ -13,8 +13,10 @@ public:
 	void checkEvents(Event &event, RenderWindow &window);
 	void render(RenderWindow &window);
 	bool checkGameEnd();
+	void reset();
 
 private:
+	Text score;
 	Sprite backgroundSprite;
 	float dy = 0;
 	Clock clock;
@@ -29,6 +31,5 @@ private:
 	Vector2f genRandomVectf();
 
 	bool gamePaused;
-
 };
 

@@ -2,6 +2,14 @@
 
 
 
+void Kitty::reset()
+{
+	this->kitty_pos = KITTY_INITIAL_POSITION;
+	this->kitty_sprite.setTexture(assets->KITTY_RIGHT_TEXTURE);
+	this->kitty_sprite.setPosition(KITTY_INITIAL_POSITION);
+	this->directX = None;
+}
+
 Kitty::Kitty(shared_ptr<Assets> ptr_assets)
 {
 
@@ -30,7 +38,7 @@ Vector2f Kitty::getPosition()
 	//return this->kitty_sprite.getPosition();
 }
 
-void Kitty::setPosition(Vector2f & newPos)
+void Kitty::setPosition(Vector2f newPos)
 {
 	kitty_sprite.setPosition(newPos);
 }

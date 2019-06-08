@@ -12,12 +12,13 @@ private:
 	Vector2f getHorizontalOffset();
 
 public:
+	void reset();
 	DirectionX directX = None;
 	Kitty(shared_ptr<Assets> ptr_assets);
 	~Kitty();
 	void move(Vector2f &deltaPos);
 	Vector2f getPosition();
-	void setPosition(Vector2f &newPos);
+	void setPosition(Vector2f newPos);
 	void update();
 	void draw(RenderWindow &window);
 

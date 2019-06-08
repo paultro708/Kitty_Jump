@@ -4,8 +4,9 @@
 
 Menu::Menu(shared_ptr <Assets> ptr_assets) :
 	playButton(ptr_assets, "Play", 300),
-	quitButton(ptr_assets, "Quit", 500)
+	quitButton(ptr_assets, "Quit", 450)
 {
+	//menu = true;
 	assets = ptr_assets;
 	logo.setTexture(assets->LOGO_TEXT);
 	//logo.setPosition(0, 0);
@@ -20,6 +21,7 @@ Menu::Menu(shared_ptr <Assets> ptr_assets) :
 
 Menu::~Menu()
 {
+//	menu = false;
 }
 
 void Menu::doTheLoop(Event & event, RenderWindow & window)
@@ -35,8 +37,24 @@ void Menu::checkEvents(Event & event, RenderWindow & window)
 {
 	while (window.pollEvent(event))
 	{
-		if (event.type == Event::Closed)
+		if ((event.type == Event::Closed)||getMenuState()==Quit)
 			window.close();
+	}
+	Vector2i mousePos = Mouse::getPosition();
+	//cout << mousePos.x << " " << mousePos.y << endl;
+	playButton.mouseOn(Vector2f(mousePos));
+	if (playButton.checkButtonClick(event))
+	{
+		cout << "Play button clicked\n";
+		setMenuState(Play);
+		play = true;
+	}
+	quitButton.mouseOn(Vector2f(mousePos));
+	if (quitButton.checkButtonClick(event))
+	{
+		cout << "Quit button clicked\n";
+		setMenuState(Quit);
+		window.close();
 	}
 }
 

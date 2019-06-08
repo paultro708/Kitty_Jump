@@ -4,16 +4,17 @@
 
 Game::Game(shared_ptr <Assets> ptr_assets) : my_kitty(ptr_assets), tmpPlatform(ptr_assets)
 {
-	/*for (int i = 0; i < NUMBER_PLATFORMS; i++)
-	{
-		Platform plat;
-		this->Ptab.push_back(plat);
-	}*/
 	assets = ptr_assets;
 	backgroundSprite.setTexture(assets->BACKGROUND_TEXTURE);
-
+	score.setFont(assets->RAVIE);
+	score.setString("Score: " + to_string(actualScore));
+	score.setCharacterSize(16);
+	score.setFillColor(Color::White);//Color(0, 158, 242));
+	score.setPosition(Vector2f(0, 0));
 	gamePaused = false;
 	gen_platforms();
+	//init one of platform under the kitty initial position to not over the game on start
+	Ptab[0].setPosition(Vector2f(KITTY_INITIAL_POSITION.x- 20, KITTY_INITIAL_POSITION.y + 200));
 }
 
 Game::~Game()
@@ -22,17 +23,13 @@ Game::~Game()
 
 void Game::doTheLoop(Event &event, RenderWindow &window)
 {
-	//while (window.isOpen())
-	{
-		this->checkEvents(event, window);
-		if (!gamePaused) {
-			this->my_kitty.update();
-			this->update_jumping();
-			this->checkGameEnd();
-		}
-		this->render(window);
+	this->checkEvents(event, window);
+	if (!gamePaused) {
+		this->my_kitty.update();
+		this->update_jumping();
+		this->checkGameEnd();
 	}
-
+	this->render(window);
 }
 
 void Game::checkEvents(Event & event, RenderWindow &window)
@@ -44,13 +41,11 @@ void Game::checkEvents(Event & event, RenderWindow &window)
 	}
 
 	if (Keyboard::isKeyPressed(Keyboard::P))
-	//if(event.type == Event::KeyPressed && event.key.code == sf::Keyboard::P)
 	{
 		if (gamePaused)
 			gamePaused = false;
 		else
 			gamePaused = true;
-
 	}
 	if (!gamePaused) {
 
@@ -82,7 +77,6 @@ void Game::checkEvents(Event & event, RenderWindow &window)
 			}
 		}
 	}
-
 }
 
 void Game::render(RenderWindow &window)
@@ -91,7 +85,12 @@ void Game::render(RenderWindow &window)
 	window.draw(backgroundSprite);
 	my_kitty.draw(window);
 	draw_platforms(window);
+	score.setString("Score: " + to_string(actualScore));
+	score.setPosition({ 0,0 });
+	window.draw(score);
 	//tmp.draw(this->window);
+	cout << actualScore << endl;
+
 	window.display();
 }
 
@@ -105,6 +104,20 @@ bool Game::checkGameEnd()
 	}
 	else return gameOver;
 }
+
+void Game::reset()
+{
+	gamePaused = false;
+	gameOver = false;
+	resetScore();
+	Ptab.clear();
+	my_kitty.reset();
+	gen_platforms();
+
+	//init one of platform under the kitty initial position to not over the game on start
+	Ptab[0].setPosition(Vector2f(KITTY_INITIAL_POSITION.x - 20, KITTY_INITIAL_POSITION.y + 200));
+}
+
 
 void Game::gen_platforms()
 {
@@ -155,15 +168,19 @@ void Game::update_jumping()
 			Ptab[i].setPosition(tmpPlatformPos);
 		}
 
+	if (tmpKittyPos.y == MAX_KITTY_JUMP_HEIGHT && dy < (-2))
+		actualScore++;
+
 	//detection jumping on the platform
 	for (int i = 0; i < NUMBER_PLATFORMS; i++)
 	{ //do dopracowania 
-		Vector2f tmpKittyPos = my_kitty.getPosition();
+		//Vector2f tmpKittyPos = my_kitty.getPosition();
 		Vector2f tmpPlatformPos = Ptab[i].getPosition();
-		if (checkJumping())
+		if (checkJumping() && dy > 0)
 		{
 			dy = -10;
 		}
+
 	}
 	my_kitty.setPosition(tmpKittyPos);
 }
