@@ -17,7 +17,7 @@ int main()
 	shared_ptr <Assets> ptr_assets(new Assets());
 
 	State *state = NULL;
-	GameOver *gameover = NULL;
+	GameOver *gameover = new GameOver(ptr_assets);
 	Game *newgame = new Game(ptr_assets);
 	Menu *menu = new Menu(ptr_assets);
 
@@ -30,31 +30,69 @@ int main()
 	{ 
 		//const type_info& type = typeid(*state);
 		state->doTheLoop(event, window);
-		
-		if (typeid(*state) == typeid(Menu))
-		{
-			if (state->play)
-				state = newgame;
-		}
 
-		else if (typeid(*state) == typeid(Game))
+		switch (state->getStateType())
 		{
-			if (state->gameOver)
+		case MENU:
+			break;
+		case GAME:
+		{
+			if (typeid(*state) == typeid(Menu))
 			{
-				gameover = new GameOver(ptr_assets, state->getScore());
-				state = gameover;
+				state->setStateType(MENU); //back to default state
+				state = newgame;
 			}
-		}
-		else if (typeid(*state) == typeid(GameOver))
-		{
-			if (state->play)
+			else if (typeid(*state) == typeid(GameOver))
 			{
-				state->play = false;
+				state->setStateType(GAMEOVER);
 				newgame->reset();
 				//newgame= new Game(ptr_assets);
 				state = newgame;
 			}
 		}
+			break;
+		case GAMEOVER:
+		{
+			if (typeid(*state) == typeid(Game))
+			{
+				int tmpScore = state->getScore();
+				state->setStateType(GAME);
+				state = gameover;
+				state->setScore(tmpScore);
+			}
+		
+		}
+			break;
+
+		default:
+			//jakiœ kod
+			break;
+		}
+		
+		//if (typeid(*state) == typeid(Menu))
+		//{
+		//	if (state->play)
+		//		state = newgame;
+		//}
+
+		//else if (typeid(*state) == typeid(Game))
+		//{
+		//	if (state->gameOver)
+		//	{
+		//		gameover = new GameOver(ptr_assets, state->getScore());
+		//		state = gameover;
+		//	}
+		//}
+		//else if (typeid(*state) == typeid(GameOver))
+		//{
+		//	if (state->play)
+		//	{
+		//		state->play = false;
+		//		newgame->reset();
+		//		//newgame= new Game(ptr_assets);
+		//		state = newgame;
+		//	}
+		//}
 	}
 
 	delete newgame, gameover, menu;

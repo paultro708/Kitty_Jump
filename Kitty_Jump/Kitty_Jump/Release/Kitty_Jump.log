@@ -1,14 +1,14 @@
-﻿  Game.cpp
+﻿  main.cpp
 c:\users\paulina\documents\studia\4_sem\pk4\projekt\kitty_jump\kitty_jump\consts.h(19): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
 c:\users\paulina\documents\studia\4_sem\pk4\projekt\kitty_jump\kitty_jump\consts.h(20): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
-Game.cpp(154): warning C4305: '+=': truncation from 'double' to 'float'
-Game.cpp(190): warning C4018: '<': signed/unsigned mismatch
-Game.cpp(217): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-Game.cpp(218): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+main.cpp(15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Menu.cpp
+c:\users\paulina\documents\studia\4_sem\pk4\projekt\kitty_jump\kitty_jump\consts.h(19): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\paulina\documents\studia\4_sem\pk4\projekt\kitty_jump\kitty_jump\consts.h(20): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
   Generating code
-  3 of 378 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+  15 of 379 functions ( 4.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    11 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   Kitty_Jump.vcxproj -> C:\Users\Paulina\Documents\Studia\4_sem\pk4\projekt\Kitty_Jump\Release\Kitty_Jump.exe
   Kitty_Jump.vcxproj -> C:\Users\Paulina\Documents\Studia\4_sem\pk4\projekt\Kitty_Jump\Release\Kitty_Jump.pdb (Full PDB)

@@ -5,7 +5,7 @@
 class Menu: public State
 {
 private:
-	MenuStates currentMenuState;
+	//MenuStates currentMenuState;
 	Button playButton;
 	Button quitButton;
 	shared_ptr <Assets> assets;
@@ -19,7 +19,7 @@ public:
 	void doTheLoop(Event &event, RenderWindow &window);
 	void checkEvents(Event &event, RenderWindow &window);
 	void render(RenderWindow &window);
-	void setMenuState(MenuStates newState);
-	MenuStates getMenuState();
+	//void setMenuState(MenuStates newState);
+	//MenuStates getMenuState();
 };
 

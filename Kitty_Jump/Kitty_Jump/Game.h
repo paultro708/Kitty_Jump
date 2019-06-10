@@ -12,14 +12,13 @@ public:
 	void doTheLoop(Event &event, RenderWindow &window);
 	void checkEvents(Event &event, RenderWindow &window);
 	void render(RenderWindow &window);
-	bool checkGameEnd();
+	void checkGameEnd();
 	void reset();
 
 private:
 	Text score;
 	Sprite backgroundSprite;
 	float dy = 0;
-	Clock clock;
 	Kitty my_kitty;
 	vector <Platform> Ptab;
 	Platform tmpPlatform;
@@ -29,7 +28,5 @@ private:
 	void draw_platforms(RenderWindow &window);
 	bool checkJumping();
 	Vector2f genRandomVectf();
-
-	bool gamePaused;
 };
 

@@ -4,6 +4,7 @@
 
 Game::Game(shared_ptr <Assets> ptr_assets) : my_kitty(ptr_assets), tmpPlatform(ptr_assets)
 {
+	setStateType(GAME);
 	assets = ptr_assets;
 	backgroundSprite.setTexture(assets->BACKGROUND_TEXTURE);
 	score.setFont(assets->RAVIE);
@@ -11,10 +12,10 @@ Game::Game(shared_ptr <Assets> ptr_assets) : my_kitty(ptr_assets), tmpPlatform(p
 	score.setCharacterSize(16);
 	score.setFillColor(Color::White);//Color(0, 158, 242));
 	score.setPosition(Vector2f(0, 0));
-	gamePaused = false;
+	//gamePaused = false;
 	gen_platforms();
 	//init one of platform under the kitty initial position to not over the game on start
-	Ptab[0].setPosition(Vector2f(KITTY_INITIAL_POSITION.x- 20, KITTY_INITIAL_POSITION.y + 200));
+	Ptab[0].setPosition(Vector2f(KITTY_INITIAL_POSITION.x - 20, KITTY_INITIAL_POSITION.y + 200));
 }
 
 Game::~Game()
@@ -24,7 +25,7 @@ Game::~Game()
 void Game::doTheLoop(Event &event, RenderWindow &window)
 {
 	this->checkEvents(event, window);
-	if (!gamePaused) {
+	if (getStateType() != PAUSE) {
 		this->my_kitty.update();
 		this->update_jumping();
 		this->checkGameEnd();
@@ -42,12 +43,19 @@ void Game::checkEvents(Event & event, RenderWindow &window)
 
 	if (Keyboard::isKeyPressed(Keyboard::P))
 	{
-		if (gamePaused)
-			gamePaused = false;
+		if (getStateType() == PAUSE)
+		{
+			setStateType(GAME);
+			return;
+		}
 		else
-			gamePaused = true;
+		{
+			setStateType(PAUSE);//gamePaused = true;
+			return;
+		}
 	}
-	if (!gamePaused) {
+	if (getStateType() != PAUSE)//!gamePaused) 
+	{
 
 		if (event.type == Event::KeyPressed)
 			switch (event.key.code)
@@ -94,25 +102,28 @@ void Game::render(RenderWindow &window)
 	window.display();
 }
 
-bool Game::checkGameEnd()
+void Game::checkGameEnd()
 {
 	if (my_kitty.getPosition().y + KITTY_SIZE.y > WINDOW_SIZE.y)
 	{
-		cout << "gae=me over!";
+		/*cout << "gae=me over!";
 		this->gameOver = true;
-		return gameOver;
+		return gameOver;*/
+		setStateType(GAMEOVER);
 	}
-	else return gameOver;
+	//else return gameOver;
 }
 
 void Game::reset()
 {
-	gamePaused = false;
-	gameOver = false;
+	//gamePaused = false;
+	//gameOver = false;
+	dy = 0;
+	setStateType(GAME);
 	resetScore();
 	Ptab.clear();
-	my_kitty.reset();
 	gen_platforms();
+	my_kitty.reset();
 
 	//init one of platform under the kitty initial position to not over the game on start
 	Ptab[0].setPosition(Vector2f(KITTY_INITIAL_POSITION.x - 20, KITTY_INITIAL_POSITION.y + 200));
@@ -218,44 +229,3 @@ Vector2f Game::genRandomVectf()
 	pos.y = rand() % (int)(WINDOW_SIZE.y - PLATFORM_SIZE.y);
 	return pos;
 }
-//
-//void Game::falling(float &offsetY)
-//{
-//	float tmpSpeed = PLATFORM_DELTA_REFLECT;
-//	if (checkJumping())
-//	{
-//		my_kitty.setSpeedY(my_kitty.getSpeedY() + ACCELERATION / 8);
-//		offsetY= my_kitty.getSpeedY();
-//	}
-//	else {
-//		my_kitty.setSpeedY(-tmpSpeed);
-//	}
-//}
-//
-//void Game::jumping(float &offsetY)
-//{
-//	my_kitty.setSpeedY(my_kitty.getSpeedY() + ACCELERATION);
-//	offsetY = my_kitty.getSpeedY();
-//}
-//
-//float Game::getKittyVerticalOffset()
-//{
-//	float offsetY = 0;
-//
-//	if (my_kitty.getSpeedY() < 0)
-//	{
-//		jumping(offsetY);
-//	}
-//	else
-//		falling(offsetY);
-//	return offsetY;
-//}
-//
-//void Game::moveKitty()
-//{
-//	Vector2f pos;
-//	pos.x = my_kitty.getHorizontalOffset();
-//	pos.y = getKittyVerticalOffset();
-//	my_kitty.move(pos);
-//}
-//

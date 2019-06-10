@@ -6,7 +6,7 @@ Menu::Menu(shared_ptr <Assets> ptr_assets) :
 	playButton(ptr_assets, "Play", 300),
 	quitButton(ptr_assets, "Quit", 450)
 {
-	//menu = true;
+	setStateType(MENU);
 	assets = ptr_assets;
 	logo.setTexture(assets->LOGO_TEXT);
 	//logo.setPosition(0, 0);
@@ -37,7 +37,7 @@ void Menu::checkEvents(Event & event, RenderWindow & window)
 {
 	while (window.pollEvent(event))
 	{
-		if ((event.type == Event::Closed)||getMenuState()==Quit)
+		if ((event.type == Event::Closed)||getStateType()==QUIT)
 			window.close();
 	}
 	Vector2i mousePos = Mouse::getPosition();
@@ -46,14 +46,15 @@ void Menu::checkEvents(Event & event, RenderWindow & window)
 	if (playButton.checkButtonClick(event))
 	{
 		cout << "Play button clicked\n";
-		setMenuState(Play);
-		play = true;
+		//setMenuState(Play);
+		setStateType(GAME);
+		//play = true;
 	}
 	quitButton.mouseOn(Vector2f(mousePos));
 	if (quitButton.checkButtonClick(event))
 	{
 		cout << "Quit button clicked\n";
-		setMenuState(Quit);
+		setStateType(QUIT);
 		window.close();
 	}
 }
@@ -69,13 +70,13 @@ void Menu::render(RenderWindow & window)
 	//draw_platforms(window);
 	window.display();
 }
-
-void Menu::setMenuState(MenuStates newState)
-{
-	currentMenuState = newState;
-}
-
-MenuStates Menu::getMenuState()
-{
-	return currentMenuState;
-}
+//
+//void Menu::setMenuState(MenuStates newState)
+//{
+//	currentMenuState = newState;
+//}
+//
+//MenuStates Menu::getMenuState()
+//{
+//	return currentMenuState;
+//}

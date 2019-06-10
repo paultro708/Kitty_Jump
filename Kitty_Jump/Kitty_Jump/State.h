@@ -9,15 +9,17 @@ public:
 	shared_ptr<Assets> assets;
 	virtual ~State() {};
 	int getScore();
+	void setScore(const int newScore);
 	void resetScore();
-	bool gameOver = false;
-	bool play = false;
+	//bool gameOver = false;
+	//bool play = false;
 	virtual void doTheLoop(Event &event, RenderWindow &window) = 0;
 	virtual void checkEvents(Event &event, RenderWindow &window)=0;
 	virtual void render(RenderWindow &window) = 0;
-
-	//StateType Gstate;
-	unsigned int actualScore = 0;
+	void setStateType(StateType newState);
+	StateType getStateType();
+	int actualScore = 0;
+	StateType stateType;
 
 };
 

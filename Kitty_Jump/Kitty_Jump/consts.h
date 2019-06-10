@@ -38,16 +38,17 @@ enum DirectionX
 	Right
 };
 
-enum MenuStates
-{
-	Play=0,
-	Quit
-};
-
-//enum StateType
+//enum MenuStates
 //{
-//	Menu=0,
-//	Game,
-//	Pause,
-//	GameOver
+//	Play=0,
+//	Quit
 //};
+
+enum StateType
+{
+	MENU = 0,
+	GAME,
+	PAUSE,
+	GAMEOVER,
+	QUIT
+};
