@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Game.h"
 
 
@@ -10,12 +11,12 @@ Game::Game(shared_ptr <Assets> ptr_assets) : my_kitty(ptr_assets), tmpPlatform(p
 	score.setFont(assets->RAVIE);
 	score.setString("Score: " + to_string(actualScore));
 	score.setCharacterSize(16);
-	score.setFillColor(Color::White);//Color(0, 158, 242));
+	score.setFillColor(Color::White);
 	score.setPosition(Vector2f(0, 0));
-	//gamePaused = false;
 	gen_platforms();
 	//init one of platform under the kitty initial position to not over the game on start
 	Ptab[0].setPosition(Vector2f(KITTY_INITIAL_POSITION.x - 20, KITTY_INITIAL_POSITION.y + 200));
+	dy = 0;
 }
 
 Game::~Game()
@@ -50,11 +51,11 @@ void Game::checkEvents(Event & event, RenderWindow &window)
 		}
 		else
 		{
-			setStateType(PAUSE);//gamePaused = true;
+			setStateType(PAUSE);
 			return;
 		}
 	}
-	if (getStateType() != PAUSE)//!gamePaused) 
+	if (getStateType() != PAUSE)
 	{
 
 		if (event.type == Event::KeyPressed)
@@ -96,9 +97,6 @@ void Game::render(RenderWindow &window)
 	score.setString("Score: " + to_string(actualScore));
 	score.setPosition({ 0,0 });
 	window.draw(score);
-	//tmp.draw(this->window);
-	cout << actualScore << endl;
-
 	window.display();
 }
 
@@ -106,18 +104,12 @@ void Game::checkGameEnd()
 {
 	if (my_kitty.getPosition().y + KITTY_SIZE.y > WINDOW_SIZE.y)
 	{
-		/*cout << "gae=me over!";
-		this->gameOver = true;
-		return gameOver;*/
 		setStateType(GAMEOVER);
 	}
-	//else return gameOver;
 }
 
 void Game::reset()
 {
-	//gamePaused = false;
-	//gameOver = false;
 	dy = 0;
 	setStateType(GAME);
 	resetScore();
@@ -132,15 +124,6 @@ void Game::reset()
 
 void Game::gen_platforms()
 {
-	/*Vector2f platformPos;
-	for (int i = 0; i < NUMBER_PLATFORMS; i++) {
-		platformPos.x = std::rand() % WINDOW_SIZE.x;
-		platformPos.y = std::rand() % WINDOW_SIZE.y;
-
-		tmp.setPosition(platformPos);
-		Ptab.push_back(platformPos);
-	}*/
-
 	Vector2f pos;
 	for (int i = 0; i < NUMBER_PLATFORMS; i++)
 	{
@@ -184,8 +167,7 @@ void Game::update_jumping()
 
 	//detection jumping on the platform
 	for (int i = 0; i < NUMBER_PLATFORMS; i++)
-	{ //do dopracowania 
-		//Vector2f tmpKittyPos = my_kitty.getPosition();
+	{
 		Vector2f tmpPlatformPos = Ptab[i].getPosition();
 		if (checkJumping() && dy > 0)
 		{

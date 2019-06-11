@@ -1,7 +1,8 @@
+#include "stdafx.h"
 #include "Game.h"
 #include "GameOver.h"
 #include "Menu.h"
-#include <typeinfo> 
+//#include <typeinfo> 
 
 
 int main()
@@ -21,14 +22,10 @@ int main()
 	Game *newgame = new Game(ptr_assets);
 	Menu *menu = new Menu(ptr_assets);
 
-	//state = newgame;
-	state = newgame;
 	state = menu;
-	//state->doTheLoop(event);
 
 	while (window.isOpen())
 	{ 
-		//const type_info& type = typeid(*state);
 		state->doTheLoop(event, window);
 
 		switch (state->getStateType())
@@ -46,7 +43,6 @@ int main()
 			{
 				state->setStateType(GAMEOVER);
 				newgame->reset();
-				//newgame= new Game(ptr_assets);
 				state = newgame;
 			}
 		}
@@ -63,9 +59,7 @@ int main()
 		
 		}
 			break;
-
 		default:
-			//jakiœ kod
 			break;
 		}
 		

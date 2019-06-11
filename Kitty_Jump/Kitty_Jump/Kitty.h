@@ -6,7 +6,7 @@ class Kitty
 {
 private:
 	shared_ptr<Assets> assets;
-	Vector2f kitty_pos; 
+	Vector2f kitty_pos;
 	Sprite kitty_sprite;
 	void checkCylinderEffect(); //chceck go outside the boards in width
 	Vector2f getHorizontalOffset();

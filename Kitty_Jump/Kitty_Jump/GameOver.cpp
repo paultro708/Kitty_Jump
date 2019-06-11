@@ -1,31 +1,26 @@
+#include "stdafx.h"
 #include "GameOver.h"
 
 
 
 GameOver::GameOver(shared_ptr <Assets> ptr_assets) : playAgain(ptr_assets, "Play again", 320), quit(ptr_assets, "Quit", 450)
 {
-//	this->play = false;
-	//this->gameOver = true;
 	setStateType(GAMEOVER);
 	assets = ptr_assets;
 	textGameOver.setFont(assets->RAVIE);
 	textGameOver.setString("Game Over!");
-	textGameOver.setCharacterSize(45);
+	textGameOver.setCharacterSize(BUTTON_TEXT_SIZE);
 	textGameOver.setFillColor(Color::Red);
 	textGameOver.setStyle(Text::Bold);
-	//textGameOver.setPosition(50, WINDOW_SIZE.y / 2 - 50);
 
 	FloatRect textGameOverRect = textGameOver.getLocalBounds();
 	textGameOver.setOrigin(textGameOverRect.left + textGameOverRect.width / 2.0f, textGameOverRect.top + textGameOverRect.height / 2.0f);
 	textGameOver.setPosition(Vector2f(WINDOW_SIZE.x / 2.0f, WINDOW_SIZE.y / 2.0f - 200));
 
 	backgroundSprite.setTexture(assets->BACKGROUND_TEXTURE);
-	//actualScore = score;
 	textScore.setFont(assets->RAVIE);
-//	textScore.setString("Your score: " + to_string(actualScore));
-	textScore.setCharacterSize(35);
+	textScore.setCharacterSize(SCORE_OVER_TEXT_SIZE);
 	textScore.setFillColor(Color::Red);
-
 }
 
 
@@ -56,7 +51,7 @@ void GameOver::checkEvents(Event & event, RenderWindow &window)
 		//play = true;
 		setStateType(GAME);
 	}
-	
+
 	quit.mouseOn(Vector2f(mousePos));
 	if (quit.checkButtonClick(event))
 		window.close();

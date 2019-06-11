@@ -2,10 +2,9 @@
 #include "State.h"
 #include "Button.h"
 
-class Menu: public State
+class Menu : public State
 {
 private:
-	//MenuStates currentMenuState;
 	Button playButton;
 	Button quitButton;
 	shared_ptr <Assets> assets;
@@ -19,7 +18,5 @@ public:
 	void doTheLoop(Event &event, RenderWindow &window);
 	void checkEvents(Event &event, RenderWindow &window);
 	void render(RenderWindow &window);
-	//void setMenuState(MenuStates newState);
-	//MenuStates getMenuState();
 };
 

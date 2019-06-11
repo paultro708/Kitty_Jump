@@ -2,7 +2,7 @@
 #include "State.h"
 #include "Button.h"
 
-class GameOver: public State
+class GameOver : public State
 {
 public:
 	GameOver(shared_ptr <Assets> ptr_assets);

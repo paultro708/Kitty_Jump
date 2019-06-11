@@ -2,7 +2,7 @@
 #include "consts.h"
 #include "Assets.h"
 
-class Button{
+class Button {
 
 private:
 	shared_ptr <Assets> assets;

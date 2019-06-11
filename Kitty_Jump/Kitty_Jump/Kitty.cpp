@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "Kitty.h"
 
 
@@ -12,7 +13,6 @@ void Kitty::reset()
 
 Kitty::Kitty(shared_ptr<Assets> ptr_assets)
 {
-
 	assets = ptr_assets;
 
 	this->kitty_pos = KITTY_INITIAL_POSITION;

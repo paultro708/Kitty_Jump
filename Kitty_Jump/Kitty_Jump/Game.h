@@ -2,12 +2,12 @@
 #include "State.h"
 #include "Kitty.h"
 #include "Platform.h"
-#include <random>
+//#include <random>
 
-class Game: public State
+class Game : public State
 {
 public:
-	Game (shared_ptr <Assets> ptr_assets);
+	Game(shared_ptr <Assets> ptr_assets);
 	~Game();
 	void doTheLoop(Event &event, RenderWindow &window);
 	void checkEvents(Event &event, RenderWindow &window);
@@ -18,7 +18,7 @@ public:
 private:
 	Text score;
 	Sprite backgroundSprite;
-	float dy = 0;
+	float dy;
 	Kitty my_kitty;
 	vector <Platform> Ptab;
 	Platform tmpPlatform;
@@ -28,5 +28,7 @@ private:
 	void draw_platforms(RenderWindow &window);
 	bool checkJumping();
 	Vector2f genRandomVectf();
+
+	//bool gamePaused;
 };
 
